@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title  %} Nos produits {% endblock title  %}
+
+{% block main %}
+
+<div uk-filter="target: .js-filter">
+
+    <ul class="uk-subnav uk-subnav-pill" id="sort">
+
+        <li uk-filter-control><a href="#">Tout</a></li>
+        {% for key in datas.keys %}
+        <li uk-filter-control="[data-category='{{ key }}']"><a href="#">{{ key }}</a></li>
+        {% endfor %}
+
+    </ul>
+
+    <ul class="js-filter uk-child-width-1-6 uk-text-center" uk-grid>
+
+        {% for key, value in datas.items %}
+
+            {% for data in value %}
+            <li data-category="{{ key }}">
+                <div class="uk-card uk-card-body uk-card-default uk-card-hover">
+                    <span>{{ data.name }}</span>
+                    <a href="{% url 'product' data.slug %}">Voir plus</a>
+                </div>
+            </li>
+            {% endfor %}
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+{% endblock main %}
+
+{% block script %}
+<script>
+    $('#sort li a').click(e => {
+        $(this).toggleClass('uk-active')
+    })
+</script>
+{% endblock script %}

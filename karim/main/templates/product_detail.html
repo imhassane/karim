@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %} {{ product.name }} {% endblock title %}
+
+{% block main %}
+
+<div>
+
+
+    <div>
+        <h2>{{ product.name }}</h2>
+        <span class="uk-text-meta">Mise à jour le {{ product.updated_at|date:"j N o à H:i" }}</span>
+    </div>
+
+    <div uk-grid>
+
+        <div class="uk-width-1-3@m uk-width-1-1@s">
+
+        </div>
+
+        <div class="uk-width-2-3@m uk-width-1-1@s">
+
+            <div>
+                <h3>Informations importantes</h3>
+
+                <div class="row">
+                    <div class="col-6">
+                        <span>Prix</span>
+                        <p>{{ product.price }}</p>
+                    </div>
+                    <div class="col-6">
+                        <span>Adresse</span>
+                        <p>{{ product.address }}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <span>Ville</span>
+                        <p>{{ product.city }}</p>
+                    </div>
+                    <div class="col-6">
+                        <span>Disponibilité</span>
+                        <p>Le {{ product.availability }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+        <h3>Description du produit</h3>
+        <p>
+            {% if product.description != '' %}
+                {{ product.description }}
+            {% else %}
+                Aucune description n'est disponible pour ce produit
+            {% endif %}
+        </p>
+    </div>
+
+    <div>
+        <h3>Contactez-nous</h3>
+        <p>
+            Si le produit vous intéresse, veuillez nous contacter, <br>
+            Nous faisons de notre mieux pour être disponible tout le temps. <br>
+            Veuillez nous appeler sur le numéro suivant.
+
+            <span class="form-control">+33 6 16 55 29 34</span>
+        </p>
+    </div>
+
+</div>
+
+{% endblock main %}
+
+{% block script %}
+
+{% endblock script %}
