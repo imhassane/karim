@@ -1,0 +1,22 @@
+<form action="" method="get">
+
+    <input type="search" name="search" class="uk-input" placeholder="Entrez votre recherche" id="search" />
+
+    <span uk-icon="icon: search"></span>
+
+</form>
+
+{% block script %}
+
+<script>
+
+    let search = document.querySelector('#search')
+    let main = document.querySelector('main')
+
+    search.addEventListener('blur', e => {
+        document.write("<p class='uk-text-meta'>" + e.target.value + "</p>")
+    })
+
+</script>
+
+{% endblock script %}

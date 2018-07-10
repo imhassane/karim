@@ -2,6 +2,8 @@ from django.db import models
 from .Base import Base
 from .Category import Category
 
+from django.shortcuts import reverse
+
 
 class Product(Base):
 
@@ -19,5 +21,11 @@ class Product(Base):
     city = models.CharField(default='', max_length=100)
     availability = models.DateField()
 
+    # Image du produit.
+    image = models.ImageField(upload_to='products', default='')
+
     # Catégories du produit
     category = models.ManyToManyField(Category, related_name='products')
+
+    def get_absolute_url(self):
+        return reverse('main:product', kwargs={'slug': self.slug})
