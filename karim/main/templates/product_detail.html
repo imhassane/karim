@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% load static %}
+
 {% block title %} {{ product.name }} {% endblock title %}
 
 {% block main %}
@@ -59,6 +61,16 @@
                     </div>
                 </div>
 
+                <div>
+                    <p>
+                        {% if product.quantity > 0 %}
+                        <span class="uk-label">Disponible en stock</span>
+                        {% else %}
+                        <span class="uk-label uk-label-danger">Ce produit n'est plus disponible</span>
+                        {% endif %}
+                    </p>
+                </div>
+
             </div>
 
         </div>
@@ -71,10 +83,37 @@
             {% if product.description != '' %}
                 {{ product.description }}
             {% else %}
-                Aucune description n'est disponible pour ce produit
+                Aucun commentaire n'a été ajouté pour ce produit
             {% endif %}
         </p>
+        <div class="uk-margin">
+            <h5>Dimensions du produit</h5>
+            <p>
+                <span class="uk-label">Note</span>
+                Les mesures données sont exprimées en mètres.
+            </p>
+            <table class="uk-table uk-table-divider uk-table-hover uk-table-striped">
+                <thead>
+                    <tr>
+                        <th>Longeur</th>
+                        <th>Largeur</th>
+                        <th>Hauteur</th>
+                        <th>Rayon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ product.length }}</td>
+                        <td>{{ product.width }}</td>
+                        <td>{{ product.height }}</td>
+                        <td>{{ product.ray }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    {% if product.quantity > 0 %}
 
     <div class="uk-margin uk-padding">
         <h3>Contactez-nous</h3>
@@ -87,12 +126,15 @@
         </p>
     </div>
 
+    {% endif %}
+
 </div>
 
 {% endblock main %}
 
 {% block script %}
 <script>
+        
 
     $('#like').click(e => {
         $.ajax({

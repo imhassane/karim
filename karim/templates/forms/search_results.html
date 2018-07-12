@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block main %}
+
+<div>
+
+    {% for category in categories %}
+    
+        <div class="uk-card uk-card-body">
+
+            <a href="">{{ category.name }}</a>
+
+        </div>
+
+    {% endfor %}
+
+    <div uk-grid uk-scrollspy="cls: uk-animation-fade; target: > div > .uk-card; delay: 100; repeat: true">
+    {% for product in products %}
+        <div>
+            <div class="uk-card uk-card-hover">
+
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">{{ product.name }}</h3>
+                    <p class="uk-text-meta">{{ product.description }}</p>
+                </div>
+
+                <div class="uk-card-footer">
+                    <a href="{{ product.get_absolute_url }}" class="uk-button uk-button-text">Voir le produit</a>
+                </div>
+
+            </div>
+        </div>
+
+    {% empty %}
+    
+    {% endfor %}
+</div>
+
+</div>
+
+{% endblock main %}

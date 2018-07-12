@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div>
+
+    <section class="uk-section uk-section-muted">
+        <h1 class="uk-text-center uk-text-middle my-title">Karim Vente</h1>
+        <p class="uk-text-center uk-h4 uk-text-lead">
+            Nous vous proposons des produits adaptés à vos besoins et à votre porte-monnaie.
+        </p>
+    </section>
+
+    <section class="uk-section uk-section-large uk-section-muted" uk-slideshow="min-width: 90%; animation: fade; autoplay: true">
+        
+        <div class="uk-position-relative uk-visible-toggle uk-light">
+            <ul class="uk-slideshow-items uk-flex-center" uk-height-viewport="offset-top: 0; offset-bottom: 30">
+                {% for img in covers %}
+                <li>
+                    <div class="uk-inline">
+                        <img src="{{ MEDIA_URL}}/{{ img.url }}" alt="{{ img.url }}" />
+                        <div class="uk-overlay-primary uk-position-cover"></div>
+                        <div class="uk-overlay uk-ligt uk-position-bottom uk-text-center">
+                            <h3 class="uk-margin-remove">Bottom</h3>
+                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+        
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+        </div>
+
+        <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+    </section>
+
+    <div class="uk-container">
+
+        <section class="uk-section uk-section-muted uk-text-center" uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
+
+            <h3 class="uk-h1 my-title">Nos produits</h3>
+            <p class="uk-text-lead">
+                Nous vous proposons des produits de qualité et à des prix raisonnables<br/>
+            </p>
+
+            <div class="uk-flex-center" uk-grid>
+                {% for category in categories %}
+                    <div class="">
+                        <div class="uk-card uk-card-body uk-card-hover">
+                            <h3 class="uk-card-title">{{ category.name }}</h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </section>
+
+        <section class="uk-section uk-text-center uk-section-secondary uk-padding" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
+            <h3 class="uk-h1 my-title">Quelques témoignages</h3>
+            <p class="uk-text-lead">
+                Quelques témoignages de personnes ayant acheté nos produits
+            </p>
+        </section>
+
+    </div>
+
+</div>
+
+{% endblock main %}
