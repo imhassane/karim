@@ -1,5 +1,5 @@
 <div class="uk-visible@s" uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
-    <nav class="uk-navbar-container uk-dark" uk-navbar style="position: relative; z-index: 980;">
+    <nav class="uk-navbar-container" uk-navbar style="position: relative; z-index: 980;">
 
         <div class="uk-navbar-left uk-margin-medium-left">
             <ul class="uk-navbar-nav">
@@ -7,21 +7,33 @@
             </ul>
         </div>
 
-        <div class="nav-overlay uk-navbar-right">
+        <div class="uk-navbar-center">
 
             <ul class="uk-navbar-nav">
 
-                <li><a href={% url 'main:products' 1 %}>Nos produits</a></li>
+                <li><a href={% url 'main:products' %}>Nos produits</a></li>
 
-                {% if not user.is_authenticated %}
+                <li><a href="{% url 'main:categories' %}">Catégories</a></li>
+
+                {% if user.is_authenticated %}
 
                 <li>
                     <a href="">{{ user.username }}</a>
+                    <div uk-dropdown="mode: click">
+                        <ul class="uk-nav uk-dropdown-nav">
+                            <li class="uk-nav-header">Mon compte</li>
+                            <li><a href="#">Voir mon profil</a></li>
+                            <li><a href="#">Editer mon profil</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="{% url 'accounts:signout' %}">Déconnexion</a></li>
+                        </ul>
+                    </div>
                 </li>
+
                     
                 {% else %}
                     <li>
-                        <a href="">Connectez-vous</a>
+                        <a href="{% url 'accounts:login' %}">Connectez-vous</a>
                     </li>
                     <li>
                         <a href="">Créer un compte</a>

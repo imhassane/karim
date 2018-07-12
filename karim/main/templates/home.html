@@ -2,7 +2,7 @@
 
 {% block main %}
 
-<div>
+<div class="uk-padding-remove">
 
     <section class="uk-section uk-section-muted">
         <h1 class="uk-text-center uk-text-middle my-title">Karim Vente</h1>
@@ -37,10 +37,9 @@
         <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
     </section>
 
-    <div class="uk-container">
+    <section class="uk-section uk-section-muted uk-text-center uk-margin-remove uk-width-1-1" uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
 
-        <section class="uk-section uk-section-muted uk-text-center" uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
-
+        <div class="uk-container">
             <h3 class="uk-h1 my-title">Nos produits</h3>
             <p class="uk-text-lead">
                 Nous vous proposons des produits de qualité et à des prix raisonnables<br/>
@@ -50,20 +49,22 @@
                 {% for category in categories %}
                     <div class="">
                         <div class="uk-card uk-card-body uk-card-hover">
-                            <h3 class="uk-card-title">{{ category.name }}</h3>
+                            <a href="{{ category.get_absolute_url }}" class=" uk-h2 uk-card-title">{{ category.name }}</a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
+        </div>
 
-        </section>
-
-        <section class="uk-section uk-text-center uk-section-secondary uk-padding" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
+    </section>
+    <section class="uk-width-large-1-1 uk-section uk-text-center uk-section-secondary uk-padding" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
+        <div class="uk-container">
             <h3 class="uk-h1 my-title">Quelques témoignages</h3>
             <p class="uk-text-lead">
                 Quelques témoignages de personnes ayant acheté nos produits
             </p>
-        </section>
+        </div>
+    </section>
 
     </div>
 

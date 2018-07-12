@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Ubuntu" rel="stylesheet" />
      
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.8/css/uikit.min.css" />
@@ -18,15 +18,18 @@
     {% block css %}{% endblock css %}
 
     <style>
-        body {
-            background-color: #fff; 
-            background-image: linear-gradient(90deg, transparent 79px, #3bbfa7 79px, #02735e 81px, transparent 81px), linear-gradient(#eee .1em, transparent .1em);
-            background-size: 100% 1.2em;
+        main {
+            min-height: 68vh;
         }
-        .my-title{
-            font-family: 'Pacifico'
+        .my-title {
+            font-family: 'Pacifico';
         }
     </style>
+
+    {% block meta %}{% endblock meta %}
+
+    <!-- TURBOLINKS -->
+    <script src="{% static 'js/turbolinks.js' %}"></script>
 
     <title>{% block title %}Bienvenue{% endblock title %}</title>
 </head>
@@ -34,10 +37,10 @@
 
     <div>
         <header>{% include "general/header.html" %}</header>
-        <div class="container-fluid">
+        <div class="">
             <main class="uk-section uk-section-muted uk-padding">{% block main %}{% endblock main %}</main>
         </div>
-        <footer>{% include "general/footer.html" %}</footer>
+        <footer class="uk-background-secondary">{% include "general/footer.html" %}</footer>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -46,6 +49,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.8/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.8/js/uikit-icons.min.js"></script>
 
+    <script>
+        Turbolinks.start()
+    </script>
     {% block script %}{% endblock script %}
 </body>
 </html>

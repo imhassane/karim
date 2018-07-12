@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Catégories
+{% endblock title %}
+
+{% block main %}
+
+<div class="container uk-grid-small" uk-scrollspy="cls: uk-animation-fade; target: div > .uk-tile; delay: 150; repeat: true" uk-grid="masonry: true; parallax: 150">
+
+    {% for category in categories %}
+    
+        <div>
+            <div class="uk-tile uk-tile-secondary uk-padding">
+                <h3 class="uk-h3 uk-card-title">
+                    {{ category.name }}
+                    <span class="uk-badge">{{ category.products.count }}</span>
+                </h3>
+                <a href="{{ category.get_absolute_url }}" class="uk-button uk-button-secondary">
+                    Voir
+                </a>
+            </div>
+        </div>
+
+    {% empty %}
+    
+    {% endfor %}
+
+</div>
+
+{% endblock main %}
