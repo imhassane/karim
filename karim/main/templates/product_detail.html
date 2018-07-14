@@ -69,6 +69,11 @@
                         <span class="uk-label uk-label-danger">Ce produit n'est plus disponible</span>
                         {% endif %}
                     </p>
+                    {% if product.quantity > 0 %}
+                    <div>
+                        <a id="add-to-bucket" href="#" class="uk-button uk-button-secondary">Commander ce produit</a>
+                    </div>
+                    {% endif %}
                 </div>
 
             </div>
@@ -134,6 +139,27 @@
 
 {% block script %}
 <script>
+
+    $('#add-to-bucket').click(e => {
+        e.preventDefault()
+        $.ajax({
+            url: "{% url 'shop:add_to_bucket' product.pk %}",
+            success: data => {
+                UIkit.notification({
+                    message: "Votre commande a été ajoutée au panier",
+                    timeout: 2000,
+                    status: "primary"
+                })
+            },
+            error: (error) => {
+                UIkit.notification({
+                    message: "L'ajout de votre commande a échoué",
+                    timeout: 2000,
+                    status: "danger"
+                })
+            }
+        })
+    })
         
 
     $('#like').click(e => {

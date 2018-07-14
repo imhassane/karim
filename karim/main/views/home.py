@@ -33,7 +33,7 @@ class HomePage(TemplateView):
             }
         ]
 
-        categories = Category.objects.all()[:10]
+        categories = Category.objects.all()[:6]
 
         context['categories'] = categories
         context['covers'] = covers

@@ -26,6 +26,4 @@ class EditProfileForm(forms.Form):
 
     avatar = forms.ImageField(widget=forms.FileInput(attrs={
        'class': 'uk-input uk-width-1-1' 
-    }), error_messages={
-        'required': "Veuillez choisir une image pour votre profil"
-    })
+    }), required=False)

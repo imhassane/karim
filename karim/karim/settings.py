@@ -14,7 +14,7 @@ SECRET_KEY = '8q@c6kts!3(=6j%4ixxz-^va=j6w)pa*q)(ym#0z2pmy@0lx++'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'e6c0b424.ngrok.io',
+    'ec98d2a6.ngrok.io',
     'localhost'
 ]
 
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'accounts',
+    'shop'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
+                'karim.context_processor.shop_info',
             ],
         },
     },
