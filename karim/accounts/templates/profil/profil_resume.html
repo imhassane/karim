@@ -1,0 +1,39 @@
+<div class="uk-panel uk-panel-body" uk-grid>
+
+    <div>
+        <div>
+            <img width="150" src="{{ profile.avatar.url }}" alt="{{ user.username }}" />
+        </div>
+    </div>
+
+    <div>
+
+        <div>
+
+            <h2 class="uk-h2">Informations personnelles</h2>
+            <div>
+
+                <p>
+                    <span class="uk-text-meta">Nom d'utilisateur:</span> {{ user.username }}
+                </p>
+                <p>
+                    <span class="uk-text-meta">Prénom:</span> {{ user.first_name }}
+                </p>
+                <p>
+                    <span class="uk-text-meta">Nom:</span> {{ user.last_name }}
+                </p>
+                <p>
+                    <span class="uk-text-meta">Adresse email</span> {{ user.email }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+
+    </div>
+
+</div>

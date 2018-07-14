@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Edition du profil
+{% endblock title %}
+
+{% block main %}
+
+<div class="container">
+
+    <p class="alert alert-success" id="success">
+        Votre profil a bien été mis à jour.
+    </p>
+
+    <p class="alert alert-danger" id="error">
+        Veuillez renseigner les champs
+    </p>
+
+    <form id="edit-profil-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <fieldset class="uk-fieldset">
+
+            <legend class="uk-legend">Mise à jour de votre profil</legend>
+
+            <div class="uk-margin uk-child-width-1-2@m uk-child-width-1-1@s uk-flex-center" uk-grid>
+                <div>
+                    <div class="form-group">
+                        <label for="">Entrez votre prénom</label>
+                        {{ form.first_name }}
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="">Entrez votre nom</label>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group uk-margin">
+                <label for="">Entrez votre adresse email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="form-group uk-margin">
+                <label for="">Choisissez votre image de profil</label>
+                {{ form.avatar }}
+            </div>
+
+            <div class="form-group uk-margin">
+                <input id="submit" type="submit" class="uk-button uk-button-danger" value="Mettre à jour le profil" />
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>
+
+{% endblock main %}
+
+{% block script %}
+
+<script>
+    $('#success').hide()
+    $('#error').hide()
+
+    $('#submit').click(event => {
+        event.preventDefault()
+
+        $.ajax({
+            url: "{% url 'accounts:edit_profil' %}",
+            success: data => {
+                $('#success').fadeIn(200)
+            },
+            error: () => {
+                $('#error').fadeIn(200)
+            }
+        })
+    })
+</script>
+
+{% endblock script %}

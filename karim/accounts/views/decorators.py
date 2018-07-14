@@ -6,3 +6,6 @@ def user_not_authenticated(user):
 
 def user_is_authenticated(user):
     return user.is_authenticated
+
+def user_is_admin(user):
+    return user.is_staff or user.superuser

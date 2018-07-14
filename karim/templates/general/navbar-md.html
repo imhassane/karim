@@ -22,8 +22,8 @@
                     <div uk-dropdown="mode: click">
                         <ul class="uk-nav uk-dropdown-nav">
                             <li class="uk-nav-header">Mon compte</li>
-                            <li><a href="#">Voir mon profil</a></li>
-                            <li><a href="#">Editer mon profil</a></li>
+                            <li><a href="{% url 'accounts:view_profil' %}">Voir mon profil</a></li>
+                            <li><a href="{% url 'accounts:edit_profil' %}">Editer mon profil</a></li>
                             <li class="uk-nav-divider"></li>
                             <li><a href="{% url 'accounts:signout' %}">Déconnexion</a></li>
                         </ul>

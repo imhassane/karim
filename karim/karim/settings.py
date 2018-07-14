@@ -18,6 +18,7 @@ ALLOWED_HOSTS = [
     'localhost'
 ]
 
+LOGIN_URL = 'accounts/signin/'
 
 # Application definition
 
