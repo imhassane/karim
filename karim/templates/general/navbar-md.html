@@ -4,6 +4,7 @@
         <div class="uk-navbar-left uk-margin-medium-left">
             <ul class="uk-navbar-nav">
                 <li><a href="{% url 'main:home' %}">Accueil</a></li>
+                <li><a href="">Contact</a></li>
             </ul>
         </div>
 
@@ -14,24 +15,8 @@
                 <li><a href={% url 'main:products' %}>Nos produits</a></li>
 
                 <li><a href="{% url 'main:categories' %}">Catégories</a></li>
-
-                {% if user.is_authenticated %}
-
-                <li>
-                    <a href="">{{ user.username }}</a>
-                    <div uk-dropdown="mode: click">
-                        <ul class="uk-nav uk-dropdown-nav">
-                            <li class="uk-nav-header">Mon compte</li>
-                            <li><a href="{% url 'accounts:view_profil' %}">Voir mon profil</a></li>
-                            <li><a href="{% url 'accounts:edit_profil' %}">Editer mon profil</a></li>
-                            <li class="uk-nav-divider"></li>
-                            <li><a href="{% url 'accounts:signout' %}">Déconnexion</a></li>
-                        </ul>
-                    </div>
-                </li>
-
                     
-                {% else %}
+                {% if not user.is_authenticated %}
                     <li>
                         <a href="{% url 'accounts:login' %}">Connectez-vous</a>
                     </li>

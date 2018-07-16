@@ -5,17 +5,21 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404 as _g
 
 from django.contrib.auth.decorators import user_passes_test
-from accounts.views.decorators import user_is_authenticated
+from django.contrib.auth.models import User
+from accounts.views.decorators import user_is_authenticated, user_not_authenticated
 
-from accounts.forms import EditProfileForm
+from accounts.forms import EditProfileForm, EditUserForm
 from accounts.models import Profile
+from django.views.generic.edit import UpdateView
+
+from karim.functions import handle_upload_file
 
 
 @user_passes_test(user_is_authenticated)
 def change_first_name(request):
 
     user = request.user
-    first_name = request.POST.get('first_name', '')
+    first_name = request.GET['first_name']
 
     user.first_name = first_name
     user.save()
@@ -27,7 +31,7 @@ def change_first_name(request):
 def change_last_name(request):
 
     user = request.user
-    last_name = request.POST.get('last_name', '')
+    last_name = request.GET['last_name']
 
     user.last_name = last_name
     user.save()
@@ -58,44 +62,56 @@ def delete_account(request):
     return JsonResponse({'is_active': user.is_active})
 
 
+@user_passes_test(user_not_authenticated)
+def activate_account(request):
+    
+    return render(request, "edit_profil.html")
+    
+
 @user_passes_test(user_is_authenticated)
 def edit_profil(request):
     
     context = {}
-
     user = request.user
-    profil = _g(Profile, user=user)
-    
-    # Valeur initiales du formulaire
-    initial = {
-        'username': user.username,
+
+    # Valeurs par défaut des formulaires.
+    user_form_initial = {
         'first_name': user.first_name,
         'last_name': user.last_name,
-        'email': user.email,
-        'avatar': profil.avatar 
+        'email': user.email
     }
-    form = EditProfileForm(request.POST or None, initial=initial)
-    context['form'] = form
 
-    if form.is_valid():
+    # Formulaire d'édition de l'utilisateur.
+    user_form = EditUserForm(request.POST or None, initial=user_form_initial)
+    context['user_form'] = user_form
 
-        datas = form.cleaned_data
-        first_name, last_name = datas['first_name'], datas['last_name']
-        email, avatar = datas['email'], datas['avatar']
+    if user_form.is_valid():
+        
+        first, last = user_form.cleaned_data['first_name'], user_form.cleaned_data['last_name']
+        email = user_form.cleaned_data['email']
 
-        user.first_name, user.last_name = first_name, last_name
-        user.email, profil.avatar = email, avatar
+        if len(first) != 0:
+            user.first_name = first
+        
+        if len(last) != 0:
+            user.last_name = last
 
-        # On enregistre l'avatar sur le serveur.
-        fs = FileSystemStorage()
-        avatar = request.FILES['avatar']
-        fs.save("users/%s" % avatar.name, avatar)
-
+        if len(email) != 0:
+            user.email = email
+        
         user.save()
+    
+    # Formulaire d'édition du profil
+    profil = _g(Profile, user=user)
+    profil_form = EditProfileForm(request.POST, request.FILES, initial={'avatar': profil.avatar})
+    context['profil_form'] = profil_form
+
+    if profil_form.is_valid():
+        file_name = profil_form.cleaned_data['avatar']
+
+        handle_upload_file('users', file_name, request.FILES)
+        profil.avatar = file_name
         profil.save()
-
-        context['success'] = True
-
-        return JsonResponse({"message": "Votre profil a bien été mis à jour"})
     
     return render(request, "edit_profil.html", context)
+

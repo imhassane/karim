@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-from main.models import Category
+from main.models import Category, Witness
 
 
 class HomePage(TemplateView):
@@ -11,31 +11,13 @@ class HomePage(TemplateView):
         
         context = super().get_context_data(**kwargs)
         
-        covers = [
-            {
-                'url': 'covers/cover1.jpg',
-                'text': {
-                    'title': "",
-                    'description': ""
-                }
-            },
-            {
-                'url': 'covers/cover2.jpg',
-                'text': {
-
-                }
-            },
-            {
-                'url': 'covers/cover3.jpg',
-                'text': {
-
-                }
-            }
-        ]
-
         categories = Category.objects.all()[:6]
+        witnesses = Witness.objects.all()[:4]
+
+        covers = [{'url': c.image.url, 'text': c.name, 'description': c.description} for c in categories]
 
         context['categories'] = categories
+        context['witnesses'] = witnesses
         context['covers'] = covers
         context['home'] = True
 
