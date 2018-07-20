@@ -9,7 +9,7 @@
     <div class=" uk-margin-large-top">
 
         <p>
-            <a href="">Passer toutes les commandes: {{ total_price }} €</a>
+            <a id="validate" onclick="validate()" href="#" class="uk-button uk-button-success">Passer toutes les commandes: {{ total_price }} €</a>
         </p>
 
         {% for order in bucket %}
@@ -45,10 +45,7 @@
 
                     </div>
                     <div class="row col-12">
-                        <div class="col-6">
-                            <a href="" class="col-12 uk-button uk-button-default">Passer la commande ({{ order.product.price }} €)</a>
-                        </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <a onclick="deleteOrder({{order.pk}})" href="#" class="del_from_bucket col-12 uk-button uk-button-danger">Supprimer du panier</a>
                         </div>
                     </div>
@@ -92,6 +89,18 @@
                     status: "danger ",
                     timeout: 2000
                 })
+            }
+        })
+    }
+
+    const validate = () => {
+        $.ajax({
+            url: "{% url 'shop:validate_bucket' %}",
+            success: data => {
+                $('.container').load("{% url 'shop:bucket' %}")
+            },
+            error: error => {
+
             }
         })
     }

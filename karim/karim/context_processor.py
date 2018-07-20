@@ -9,6 +9,7 @@ def shop_info(request):
             count = 0
     except KeyError:
         request.session['bucket'] = []
+        request.session['validated'] = False
     
 
     return {

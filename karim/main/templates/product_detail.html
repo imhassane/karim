@@ -41,22 +41,22 @@
 
                 <div class="row">
                     <div class="col-6">
-                        <span>Prix</span>
-                        <p>{{ product.price }}</p>
+                        <span class="label">Prix</span>
+                        <p>{{ product.price }} €</p>
                     </div>
                     <div class="col-6">
-                        <span>Adresse</span>
+                        <span class="label">Adresse</span>
                         <p>{{ product.address }}</p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-6">
-                        <span>Ville</span>
+                        <span class="label">Ville</span>
                         <p>{{ product.city }}</p>
                     </div>
                     <div class="col-6">
-                        <span>Disponibilité</span>
+                        <span class="label">Disponibilité</span>
                         <p>Le {{ product.availability }}</p>
                     </div>
                 </div>
@@ -78,7 +78,30 @@
 
             </div>
 
+            <div class="uk-margin">
+                <h4>Quelques images</h4>
+
+                <div class="uk-grid-match uk-grid-small uk-child-width-1-3" uk-grid uk-lightbox="animation: fade">
+
+                    {% for img in pictures %}
+
+                    <div>
+
+                        <a href="{{ img.url }}" class="uk-inline" data-caption="{{ product.name }}">
+                            <img src="{{ img.url }}" alt="{{ product.name }}" />
+                        </a>
+
+                    </div>
+                    
+                    {% empty %}
+                        Aucune image disponible pour ce produit
+                    {% endfor %}
+
+                </div>
+            </div>
+
         </div>
+
 
     </div>
 
@@ -122,12 +145,12 @@
 
     <div class="uk-margin uk-padding">
         <h3>Contactez-nous</h3>
-        <p>
+        <p class="uk-margin">
             Si le produit vous intéresse, veuillez nous contacter, <br>
             Nous faisons de notre mieux pour être disponible tout le temps. <br>
             Veuillez nous appeler sur le numéro suivant.
 
-            <p class="form-control">
+            <p class="form-control has-text-centered">
                 <span uk-icon="icon: receiver"></span>
                 +33 6 16 55 29 34
             </p>

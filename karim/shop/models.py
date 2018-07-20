@@ -16,3 +16,12 @@ class Base(models.Model):
 class Order(Base):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+
+class Bucket(Base):
+
+    name = models.CharField(max_length=150, default="")
+    value = models.DecimalField(default=0, max_digits=7, decimal_places=2)
+    validated = models.BooleanField(default=False)
+    sent = models.BooleanField(default=False)
+    order = models.ManyToManyField(Order, related_name='orders')
