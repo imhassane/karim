@@ -21,7 +21,7 @@
                     <li class="uk-nav-divider"></li>
                     {% if user.is_staff %}
                     <li class="uk-nav-header">Administration</li>
-                    <li><a href="">Gérer les produits</a></li>
+                    <li><a href="{% url 'administration:adminhome' %}">Gérer les produits</a></li>
                     <li><a href="{% url 'shop:show_buckets' %}">Gérer les commandes</a></li>
                     {% endif %}
                     <li><a href="{% url 'accounts:signout' %}">Déconnexion</a></li>
